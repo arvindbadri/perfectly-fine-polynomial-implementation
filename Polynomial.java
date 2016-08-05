@@ -6,7 +6,6 @@ public class Polynomial {
 
     public Polynomial(Map<Integer, Double> terms) {
         this.terms = terms;
-        completePolynomial();
     }
 
     public Map<Integer, Double> getTerms() {
@@ -21,7 +20,7 @@ public class Polynomial {
         Map<Integer, Double> sum = new HashMap<>();
         int maxDegree = getGreaterDegree(p1, p2);
         for (int exponent = 0; exponent <= maxDegree; exponent++) {
-            sum.put(exponent, p1.getTerms().get(exponent) + p2.getTerms().get(exponent));
+            sum.put(exponent, p1.getEffectiveCoefficient(exponent) + p2.getEffectiveCoefficient(exponent));
         }
         return new Polynomial(sum);
     }
@@ -30,13 +29,14 @@ public class Polynomial {
         Map<Integer, Double> difference = new HashMap<>();
         int maxDegree = getGreaterDegree(pFrom, pToSubtract);
         for (int exponent = 0; exponent <= maxDegree; exponent++) {
-            difference.put(exponent, pFrom.getTerms().get(exponent) - pToSubtract.getTerms().get(exponent));
+            difference.put(exponent, pFrom.getEffectiveCoefficient(exponent) - pToSubtract.getEffectiveCoefficient(exponent));
         }
         return new Polynomial(difference);
     }
 
     public Polynomial multiply(Polynomial p1, Polynomial p2) {
-        return null;
+        Map<Integer, Double> product = new HashMap<> ();
+
     }
 
     public String toString() {
@@ -67,21 +67,12 @@ public class Polynomial {
         return degree1 > degree2 ? degree1 : degree2;
     }
 
-    private void completePolynomial() {
-        int degree = getDegree();
-        for (int i = 0; i <= degree; i++) {
-            if (!(terms.containsKey(i))) {
-                terms.put(i, 0d);
-            }
-        }
-    }
-
-    private void stripPolynomialOfZeroes() {
-        int degree = getDegree();
-        for (int i = 0; i <= degree; i++) {
-            if (terms.get(i) == 0) {
-                terms.remove(i);
-            }
-        }
+    /**
+     * Returns 0 if the exponent isn't present
+     * @return the coefficient if the exponent is present
+     * and zero otherwise.
+     */
+    private double getEffectiveCoefficient(int exponent) {
+        return terms.containsKey(exponent) ? terms.get(exponent) : 0;
     }
 }
