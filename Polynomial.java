@@ -56,33 +56,15 @@ public class Polynomial {
     }
 
     public String toString() {
-    	String latexcode="";
-    	
-    	for(int i=0;i<poly.size();i++){
-    		latex+= tostring(poly.get(poly[i]))+"<sup>"+poly[i]+"</sup>";
-    	}
-    	
-        return latexcode;
+    	return "";
     }
 
     public String toHTML() {
-    	String latexcode="";
-    	latexcode+="<math> \n";
-    	for(int i=0;i<poly.size();i++){
-    		latex+= tostring(poly.get(poly[i]))+"<sup>"+poly[i]+"</sup>";
-    	}
-    	latexcode+="\n </math>\n";
-        return latexcode;
+    	return "";
     }
 
     public String toLaTeX(Map<Integer, Double > poly) {
-    	String latexcode="";
-    	latexcode+="\begin{equation} \n";
-    	for(int i=0;i<poly.size();i++){
-    		latex+= tostring(poly.get(poly[i]))+"^"+poly[i];
-    	}
-    	latexcode+="\n \end{equation}\n";
-        return latexcode;
+    	return "";
     }
 
     private int getDegree() {
